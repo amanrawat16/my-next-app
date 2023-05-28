@@ -47,10 +47,9 @@ export default function CampusDataPage() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/login">
-                  Sign In
-                {/* <Link href="/login">Sign In</Link> */}
-                </a>
+         
+                <Link href="/login">Sign In</Link> */
+          
               </li>
               <li className="nav-item">
                 <a
@@ -107,11 +106,11 @@ export default function CampusDataPage() {
           <div className="row">
            
             <ul>
-        <li>CampusData's SEO captures detailed searches and directs qualified students to your program listings.</li>
+        <li>CampusData`&apos;`s SEO captures detailed searches and directs qualified students to your program listings.</li>
         <li>Your program and school pages are advertisement-free and provide information specific to your programs and courses.</li>
         <li>Student-friendly websites are designed to engage visitors and encourage them to contact programs that interest them.</li>
         <li>Our customizable contact forms help you generate the right kinds of student inquiries.</li>
-        <li>CampusData's lead forms give you access to our high conversion rate and communication tools – wherever you want to reach students.</li>
+        <li>CampusData`&apos;`s lead forms give you access to our high conversion rate and communication tools – wherever you want to reach students.</li>
         <li>Visitors can filter results by field of study, location, mode of study, and other specifications.</li>
         <li>Students can directly contact the schools they are interested in via our form.</li>
       </ul>
