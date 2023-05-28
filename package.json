@@ -2,7 +2,7 @@
   "name": "my-next-app",
   "version": "0.1.0",
   "private": true,
-  "extends": "next",
+  "extends":  "next/core-web-vitals",
   "rules": {
     "react/no-unescaped-entities": "off",
     "@next/next/no-page-custom-font": "off"

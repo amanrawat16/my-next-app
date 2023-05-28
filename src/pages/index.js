@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function CampusDataPage() {
@@ -15,7 +16,7 @@ export default function CampusDataPage() {
       <nav className="navbar navbar-expand-md navbar-light bg-light">
         <div className="container">
           <a className="navbar-brand" href="#">
-            <img src="https://amanrawat16.github.io/CampusData/WhatsApp%20Image%202023-05-25%20at%2010.12.52%20PM.jpeg" alt="logo" />
+            <Image src="/img/logo.jpg" alt="logo" width={100} height={100}/>
           </a>
           <button
             className="navbar-toggler"
@@ -94,10 +95,7 @@ export default function CampusDataPage() {
               </p>
             </div>
             <div className="col-md-6">
-              <img
-                src="https://www.keg.com/hs-fs/hubfs/shutterstock_1324027727%20%5BConverted%5D.png?width=466&name=shutterstock_1324027727%20%5BConverted%5D.png"
-                alt=""
-              />
+           
             </div>
           </div>
         </div>
@@ -173,7 +171,7 @@ export default function CampusDataPage() {
       <div className="row">
         <div className="logo">
           <a className="navbar-brand" href="">
-            <img src="https://amanrawat16.github.io/CampusData/WhatsApp%20Image%202023-05-25%20at%2010.12.52%20PM.jpeg" alt="logo"/></a>
+            <Image src="/img/logo.jpg" alt="logo"width={100}  height={100}/></a>
         </div>
         <div className="columns">
           <div className="row">
@@ -246,7 +244,7 @@ export default function CampusDataPage() {
         .nav-link{
             font-size: 22px;
         }
-        .navbar-brand img{
+        .navbar-brand Image{
             object-fit: cover;
             width: auto;
             height: 200px;
@@ -311,7 +309,7 @@ export default function CampusDataPage() {
           order: 2;
         }
     
-        .about .col-md-6 img {
+        .about .col-md-6 Image {
           max-width: 100%;
           height: auto;
         }
