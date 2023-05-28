@@ -1,118 +1,450 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import Head from 'next/head';
+import Link from 'next/link';
 
-const inter = Inter({ subsets: ['latin'] })
-
-export default function Home() {
+export default function CampusDataPage() {
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/pages/index.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <>
+      <Head>
+        <title>CampusData</title>
+        <link
+          rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        />
+      </Head>
+
+      <nav className="navbar navbar-expand-md navbar-light bg-light">
+        <div className="container">
+          <a className="navbar-brand" href="#">
+            <img src="https://amanrawat16.github.io/CampusData/WhatsApp%20Image%202023-05-25%20at%2010.12.52%20PM.jpeg" alt="logo" />
+          </a>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarCollapse"
+            aria-controls="navbarCollapse"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
           >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarCollapse">
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  Home
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  About
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  Contact Us
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/login">
+                  Sign In
+                {/* <Link href="/login">Sign In</Link> */}
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link btn btn-primary ml-auto text-light font-weight-bold"
+                  href="#"
+                  style={{ backgroundColor: '#001064' }}
+                >
+                  Request a Call
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <section className="image-container">
+        <div className="overlay"></div>
+        <div className="container">
+          <h2 style={{ color: '#fff' }}>Student Lead Generation</h2>
+          <p>
+            Optimized for conversion, our websites are the perfect way for your school to generate
+            qualified student leads.
+          </p>
+          <a className="btn btn-primary" href="#">
+            Schedule a Call
           </a>
         </div>
+      </section>
+
+      <section className="about">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6">
+              <h2>Boost Your Qualified Student Leads</h2>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis id efficitur nunc.
+                Pellentesque interdum tempor massa, ut ultricies erat auctor id.
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis id efficitur nunc.
+                Pellentesque interdum tempor massa, ut ultricies erat auctor id.
+              </p>
+            </div>
+            <div className="col-md-6">
+              <img
+                src="https://www.keg.com/hs-fs/hubfs/shutterstock_1324027727%20%5BConverted%5D.png?width=466&name=shutterstock_1324027727%20%5BConverted%5D.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="optimised">
+        <div className="container">
+          <h2>Optimized for Conversion</h2>
+          <div className="row">
+           
+            <ul>
+        <li>CampusData's SEO captures detailed searches and directs qualified students to your program listings.</li>
+        <li>Your program and school pages are advertisement-free and provide information specific to your programs and courses.</li>
+        <li>Student-friendly websites are designed to engage visitors and encourage them to contact programs that interest them.</li>
+        <li>Our customizable contact forms help you generate the right kinds of student inquiries.</li>
+        <li>CampusData's lead forms give you access to our high conversion rate and communication tools – wherever you want to reach students.</li>
+        <li>Visitors can filter results by field of study, location, mode of study, and other specifications.</li>
+        <li>Students can directly contact the schools they are interested in via our form.</li>
+      </ul>
+            </div>
+         
+        </div>
+      </section>
+
+    <section className="optimised2">
+    <div className="container">
+      <h2 classNamess="text-center">Your Benefits</h2>
+      <ul>
+        <li>Your programs are visible to students in 33+ languages.</li>
+        <li>Qualified student leads are delivered straight to your team.</li>
+        <li>Receive relevant student enquiries for your courses and programs.</li>
+        <li>Dedicated landing pages, optimized to convert leads.</li>
+        <li>No distractions - your promotional pages are yours, no external banners or advertising.</li>
+      </ul>
+    </div>
+  </section>
+
+      <section className="mail">
+        <div className="container">
+          <h2>Request a Call</h2>
+          <div className="row">
+            <div className="col">
+              <form>
+                <div className="form-group">
+                  <label htmlFor="name">Name</label>
+                  <input type="text" className="form-control" id="name" required />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="email">Email</label>
+                  <input type="email" className="form-control" id="email" required />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="number">Number</label>
+                  <input type="number" className="form-control" id="number" required />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="message">Message</label>
+                  <textarea className="form-control" id="message" rows="3" required></textarea>
+                </div>
+                <button type="submit" className="btn btn-primary">
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+      <footer>
+    <div className="container">
+      <div className="row">
+        <div className="logo">
+          <a className="navbar-brand" href="">
+            <img src="https://amanrawat16.github.io/CampusData/WhatsApp%20Image%202023-05-25%20at%2010.12.52%20PM.jpeg" alt="logo"/></a>
+        </div>
+        <div className="columns">
+          <div className="row">
+            <div className="col-sm-3">
+              <h4>Services</h4>
+              <ul>
+                <li>CRM & Marketing Automation</li>
+                <li>Student Recruitment</li>
+                <li>Student Conversion Services</li>
+              </ul>
+            </div>
+            <div className="col-sm-3">
+              <h4>Why Us</h4>
+              <ul>
+                <li>Our Brands</li>
+                <li>Testimonials</li>
+              </ul>
+            </div>
+            <div className="col-sm-3">
+              <h4>Resources</h4>
+              <ul>
+                <li>Blog</li>
+                <li>Events & Webinars</li>
+                <li>Media Kit</li>
+              </ul>
+            </div>
+            <div className="col-sm-3">
+              <h4>Get in Touch</h4>
+              <ul>
+                <li>Email: info@example.com</li>
+                <li>Phone: 123-456-7890</li>
+                <li>Address: Noida Sector 2 pincode:201301</li>
+              </ul>
+            </div>
+          </div>
+          <p><b>&copy; 2023 CampusData. All rights reserved.</b></p>
+        </div>
       </div>
+      
+            </div>
+    </footer>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+      <style jsx>{`
+        /* Add your custom styles here */
+        .navbar-brand {
+          font-weight: bold;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+        .navbar-dark .navbar-nav .nav-link {
+          color: #fff;
+        }
+    
+        .navbar-dark .navbar-nav .nav-link:hover {
+          color: #f8f9fa;
+        }
+    
+        .navbar-dark .navbar-nav .btn {
+          background-color: #283593;
+          color: #fff;
+          font-weight: bold;
+        }
+    
+        .navbar-dark .navbar-nav .btn:hover {
+          background-color: #001064;
+        }
+        .nav-link{
+            font-size: 22px;
+        }
+        .navbar-brand img{
+            object-fit: cover;
+            width: auto;
+            height: 200px;
+        }
+        .navbar-nav {
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+        }
+        li{
+            margin: 0 10px 0 10px;
+        }
+        .image-container {
+          background-image: url("https://www.keg.com/hubfs/team-group-banner-1.jpg");
+          background-size: cover;
+          background-position: center;
+          padding: 200px 0;
+          text-align: center;
+          color: #fff;
+          position: relative;
+        }
+        .overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+        }
+        .image-container h2 {
+          font-size: 42px;
+          font-weight: bold;
+          color: #fff;
+          opacity: calc(100/100);
+        }
+    
+        .image-container p {
+          font-size: 20px;
+          margin-bottom: 30px;
+          opacity: calc(100/100);
+        }
+    
+        .image-container .btn {
+          background-color: #283593;
+          color: #fff;
+          font-weight: bold;
+        }
+    
+        .image-container .btn:hover {
+          background-color: #001064;
+        }
+    
+        .about {
+          padding: 100px 0;
+        }
+    
+        .about .row {
+          align-items: center;
+        }
+    
+        .about .col-md-6 {
+          order: 2;
+        }
+    
+        .about .col-md-6 img {
+          max-width: 100%;
+          height: auto;
+        }
+    
+        .about h2 {
+          font-size: 32px;
+          font-weight: bold;
+          margin-bottom: 20px;
+        }
+    
+        .about p {
+          font-size: 18px;
+          line-height: 1.5;
+        }
+    
+        .optimised {
+          background-color: #283593;
+          color: #fff;
+          padding: 100px 0;
+        }
+    
+        .optimised h2 {
+          font-size: 40px;
+          font-weight: bold;
+          margin-bottom: 20px;
+        }
+    
+        .optimised p {
+          font-size: 18px;
+          line-height: 1.5;
+        }
+    
+        .optimised ul {
+          margin-top: 30px;
+          padding-left: 20px;
+        }
+    
+        .optimised ul li {
+          font-size: 18px;
+          margin-bottom: 10px;
+        }
+        .optimised2 {
+          background-color: white;
+          color: black;
+          padding: 100px 0;
+        }
+    
+        .optimised2 h2 {
+          font-size: 40px;
+          font-weight: bold;
+          margin-bottom: 20px;
+        }
+    
+        .optimised2 p {
+          font-size: 18px;
+          line-height: 1.5;
+        }
+    
+        .optimised2 ul {
+          margin-top: 30px;
+          padding-left: 20px;
+        }
+    
+        .optimised2 ul li {
+          font-size: 18px;
+          margin-bottom: 10px;
+        }
+        .mail {
+          padding: 100px 0;
+        }
+    
+        .mail h2 {
+          font-size: 42px;
+          font-weight: bold;
+          margin-bottom: 20px;
+          text-align: center;
+        }
+    
+        .mail form {
+          max-width: 500px;
+          margin: 0 auto;
+          border:2px solid black;
+          border-radius :12px;
+          padding: 40px
+        }
+    
+        .mail form .form-group {
+          margin-bottom: 20px;
+        }
+    
+        .mail form label {
+          font-weight: bold;
+        }
+    
+        .mail form button {
+          display: block;
+          margin: 0 auto;
+        }
+        
+        .mailcontainer {
+        border: 2px solid gainsboro;
+        border-radius: 12px;
+        padding: 20px 0 20px 0;
+    }
+    footer {
+          background-color: #f8f9fa;
+          padding: 20px 0;
+          color: #333;
+        }
+    
+        footer .logo {
+          float: left;
+        }
+    
+    
+        footer .columns h4 {
+          font-size: 18px;
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+    
+        footer .columns ul {
+          list-style: none;
+          padding-left: 0;
+        }
+    
+        footer .columns ul li {
+          margin-bottom: 5px;
+        }
+        footer li{
+            margin: 0;
+        }
+      `}</style>
+    </>
+  );
 }
