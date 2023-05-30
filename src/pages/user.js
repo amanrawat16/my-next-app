@@ -6,23 +6,20 @@ export default function UserDashboard() {
     const router = useRouter();
     const role = router.query.role; 
 
+
+
     const [data,setData]= useState();
+  
 
     useEffect(()=>{
+
         fetchData();
+       
     },[])
-
-    console.log(data);
-
+    
     const  fetchData=async()=>{
         try {
-            const response = await fetch('/api/getDatabyRole', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(role),
-              });
+            const response = await fetch(`/api/getDatabyRole?role=${role}`);
 
             if (response.ok) {
               const data = await response.json();
@@ -49,9 +46,9 @@ export default function UserDashboard() {
                 </thead>
                 <tbody>
                   {data?.map((user) => (
-                      <tr key={user.id}>
-                      <td>{user.role}</td>
-                      <td className='data'>{user.data}</td>
+                      <tr key={user?.id}>
+                      <td>{user?.role}</td>
+                      <td className='data'>{user?.data}</td>
                     </tr>
                   ))}
                 </tbody>

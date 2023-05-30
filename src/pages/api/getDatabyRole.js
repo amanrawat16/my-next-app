@@ -6,13 +6,10 @@ export default async function handler(req, res) {
       // Connect to the database
       await dbConnect();
         
-      const role = await req.body;
-        console.log(role);
-      // Fetch all users from the UserRole model
-      const data = await RoleData.find(
-        {role:`${role}`}
-      );
-  
+      const { role } = req.query;
+
+      // Fetch data based on the role query parameter
+      const data = await RoleData.find({ role });
       // Send the users as the API response
       res.status(200).json(data);
     } catch (error) {

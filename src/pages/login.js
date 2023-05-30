@@ -36,7 +36,6 @@ export default function Login() {
 
       if (response.ok) {
         const responseData = await response.json();
-        console.log(responseData);
         // Login successful, redirect to home page
         console.log('Login successful!');
         if(responseData.role == 'admin'){
@@ -47,6 +46,7 @@ export default function Login() {
             pathname: '/user',
             query: { role: responseData.role },
         }) // Redirect to home page
+     
       } 
     }
       else {
