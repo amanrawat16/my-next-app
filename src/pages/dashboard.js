@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 export default function Dashboard() {
-  const [name, setName] = useState('');
+  const [email, setName] = useState('');
   const [role, setRole] = useState('');
+  const [data,setData]=useState('');
   const [password, setPassword] = useState('');
   const [activeTab, setActiveTab] = useState('addUser');
   const [users, setUsers] = useState([]);
@@ -37,6 +38,9 @@ export default function Dashboard() {
   const handleRoleChange = (event) => {
     setRole(event.target.value);
   };
+  const handleDataChange = (event) => {
+    setData(event.target.value);
+  };
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
@@ -51,7 +55,7 @@ export default function Dashboard() {
     event.preventDefault();
 
     const userRoleData = {
-      name,
+      email,
       role,
       password,
     };
@@ -78,6 +82,35 @@ export default function Dashboard() {
       console.log('Error:', error.message);
     }
   };
+
+  const handleSubmitData = async(event)=>{
+    event.preventDefault();
+
+    const userRoleData = {
+      role,
+      data,
+    };
+
+    try {
+      const response = await fetch('/api/addData', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userRoleData),
+      });
+
+      if (response.ok) {
+        console.log('User data inserted successfully!');
+        setRole('');
+        setData(''); // Refresh the user list
+      } else {
+        console.log('User data insertion failed');
+      }
+    } catch (error) {
+      console.log('Error:', error.message);
+    }
+  }
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -139,6 +172,12 @@ export default function Dashboard() {
           >
             Manage Roles
           </li>
+          <li
+            className={activeTab === 'addData' ? 'active' : ''}
+            onClick={() => handleTabChange('addData')}
+          >
+            Add Data
+          </li>
           <li onClick={handleLogout}>Logout</li>
         </ul>
       </div>
@@ -150,11 +189,11 @@ export default function Dashboard() {
             <div className="form-container">
               <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                  <label htmlFor="name">Name:</label>
+                  <label htmlFor="email">Email:</label>
                   <input
                     type="text"
-                    id="name"
-                    value={name}
+                    id="email"
+                    value={email}
                     onChange={handleNameChange}
                   />
                 </div>
@@ -185,14 +224,14 @@ export default function Dashboard() {
               <table>
                 <thead>
                   <tr>
-                    <th>Name</th>
+                    <th>Email</th>
                     <th>Role</th>
                   </tr>
                 </thead>
                 <tbody>
                   {users.map((user) => (
                     <tr key={user.id}>
-                      <td>{user.name}</td>
+                      <td>{user.email}</td>
                       <td>{user.role}</td>
                     </tr>
                   ))}
@@ -213,7 +252,7 @@ export default function Dashboard() {
             <option value="">Select a user</option>
             {users.map((user) => (
               <option key={user._id} value={user._id}>
-                {user.name}
+                {user.email}
               </option>
             ))}
           </select>
@@ -237,14 +276,14 @@ export default function Dashboard() {
               <table>
                 <thead>
                   <tr>
-                    <th>Name</th>
+                    <th>Email</th>
                     <th>Role</th>
                   </tr>
                 </thead>
                 <tbody>
                   {users.map((user) => (
                     <tr key={user.id}>
-                      <td>{user.name}</td>
+                      <td>{user.email}</td>
                       <td>{user.role}</td>
                     </tr>
                   ))}
@@ -253,6 +292,42 @@ export default function Dashboard() {
             </div>
   </div>
 )}
+ {activeTab === 'addData' && (
+          <div className="card">
+            <h1 className="head">Add Data</h1>
+            <div className="form-container">
+              <form onSubmit={handleSubmitData}>
+
+                <div className="form-group">
+                  <label htmlFor="role">Role:</label>
+                  <input
+                    type="text"
+                    id="role"
+                    value={role}
+                    onChange={handleRoleChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="data">Message:</label>
+                  <textarea
+                    type="text"
+                    id="data"
+                    value={data}
+                    onChange={handleDataChange}
+                    style={{
+                      height:"200px",
+                      width:"420px",
+                      fontSize:"18px"
+                    }}
+                  />
+                </div>
+                <button type="submit">Add User Data</button>
+              </form>
+            </div>
+
+            
+          </div>
+        )}
       </div>
 
       <style jsx>{`

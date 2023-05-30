@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import logoImage from '../img/logo.jpg';
 
 export default function CampusDataPage() {
   return (
@@ -11,12 +12,15 @@ export default function CampusDataPage() {
           rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         />
-      </Head>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous" defer></script>
+
+     </Head>
 
       <nav className="navbar navbar-expand-md navbar-light bg-light">
         <div className="container">
           <a className="navbar-brand" href="#">
-            <Image src="/img/logo.jpg" alt="logo" width={100} height={100}/>
+            <Image src={logoImage} alt="logo" width={200} height={200}/>
           </a>
           <button
             className="navbar-toggler"
@@ -48,7 +52,10 @@ export default function CampusDataPage() {
               </li>
               <li className="nav-item">
          
-                <Link href="/login">Sign In</Link> */
+                <Link href="/login" style={{
+                  color:"gray",
+                  fontSize:"22px"
+                }}>Sign In</Link>
           
               </li>
               <li className="nav-item">
@@ -170,7 +177,7 @@ export default function CampusDataPage() {
       <div className="row">
         <div className="logo">
           <a className="navbar-brand" href="">
-            <Image src="/img/logo.jpg" alt="logo"width={100}  height={100}/></a>
+            <Image src={logoImage} alt="logo" width={200}  height={200}/></a>
         </div>
         <div className="columns">
           <div className="row">
@@ -273,6 +280,7 @@ export default function CampusDataPage() {
           height: 100%;
           background-color: rgba(0, 0, 0, 0.5);
         }
+        
         .image-container h2 {
           font-size: 42px;
           font-weight: bold;
@@ -442,6 +450,7 @@ export default function CampusDataPage() {
             margin: 0;
         }
       `}</style>
-    </>
+
+ </>
   );
 }

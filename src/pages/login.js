@@ -35,10 +35,21 @@ export default function Login() {
       });
 
       if (response.ok) {
+        const responseData = await response.json();
+        console.log(responseData);
         // Login successful, redirect to home page
         console.log('Login successful!');
-        router.push('/dashboard'); // Redirect to home page
-      } else {
+        if(responseData.role == 'admin'){
+          router.push('/dashboard');
+        }
+        else{
+          router.push({
+            pathname: '/user',
+            query: { role: responseData.role },
+        }) // Redirect to home page
+      } 
+    }
+      else {
         // Login failed, handle error case
         console.log('Login failed');
       }
@@ -74,9 +85,9 @@ export default function Login() {
           <button type="submit">Login</button>
         </form>
 
-        <p>
+        {/* <p>
           Don`&apos;`t have an account? <Link href="/signup">Signup</Link>
-        </p>
+        </p> */}
       </div>
 
       <style jsx>{`

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const userRoleSchema = new mongoose.Schema({
-  name: {
+  email: {
     type: String,
     required: true,
   },

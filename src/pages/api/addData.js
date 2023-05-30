@@ -1,27 +1,26 @@
 import dbConnect from '../../db';
-import {UserRole} from '../../models/UserRole';
+import {RoleData} from '../../models/RoleData';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
       await dbConnect();
 
-      const { email, role, password } = await req.body;
+      const { role, data } = await req.body;
     
       // Create a new user role
-      const userRole = new UserRole({
-        email,
+      const userData = new RoleData({
         role,
-        password,
+        data,
       });
-      console.log(userRole);
+
       // Save the user role to the database
-      const savedUserRole = await userRole.save();
+      const savedUserData = await userData.save();
     
-      res.status(201).json(savedUserRole);
+      res.status(201).json(savedUserData);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'An error occurred while saving the user role' });
+      res.status(500).json({ error: 'An error occurred while saving the user data' });
     }
   } else {
     res.status(405).json({ error: 'Method not allowed' });
