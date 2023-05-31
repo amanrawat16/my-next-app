@@ -26,7 +26,7 @@ export default function Login() {
 
     try {
       // Make the API call to perform login
-      const response = await fetch('/api/login', {
+      const response = await fetch('/api/loginAdmin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ export default function Login() {
   return (
     <div className="container">
       <div className="card">
-        <h1>User Login</h1>
+        <h1>Admin Login</h1>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">Email:</label>
@@ -86,7 +86,7 @@ export default function Login() {
         </form>
 
         <p>
-         <Link href="/loginAdmin">Admin Login</Link>
+         <Link href="/login">User Login</Link>
         </p>
       </div>
 

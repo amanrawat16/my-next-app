@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     const { email, password } = req.body;
 
     try {
-      const user = await UserRole.findOne({ email });
+      const user = await User.findOne({ email });
 
       if (!user) {
             res.status(401).json({ message: 'User not found' });
@@ -17,7 +17,7 @@ export default async function handler(req, res) {
       // Perform password comparison here
       if (password === user.password) {
         // Successful login
-        res.status(200).json({ message: 'Login successful',role:user.role });
+        res.status(200).json({ message: 'Login successful',role:"admin"});
       } else {
         // Invalid credentials
         res.status(401).json({ message: 'Invalid email or password' });
