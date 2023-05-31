@@ -9,11 +9,11 @@ export default async function handler(req, res) {
     const { email, password } = req.body;
 
     try {
-      const user = await User.findOne({ email });
+      const user = await UserRole.findOne({ email });
 
       if (!user) {
         try{
-          const user2 = await UserRole.findOne({ email });
+          const user2 = await User.findOne({ email });
 
           if(!user2){
             res.status(401).json({ message: 'User not found' });
