@@ -21,7 +21,7 @@ export default async function handler(req, res) {
 
           if (password === user2.password) {
             // Successful login
-            res.status(200).json({ message: 'Login successful',role:user2.role });
+            res.status(200).json({ message: 'Login successful',role:"admin" });
           } else {
             // Invalid credentials
             res.status(401).json({ message: 'Invalid email or password' });
@@ -37,7 +37,7 @@ export default async function handler(req, res) {
       // Perform password comparison here
       if (password === user.password) {
         // Successful login
-        res.status(200).json({ message: 'Login successful',role:"admin" });
+        res.status(200).json({ message: 'Login successful',role:user2.role });
       } else {
         // Invalid credentials
         res.status(401).json({ message: 'Invalid email or password' });
