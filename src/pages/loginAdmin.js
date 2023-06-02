@@ -46,7 +46,7 @@ export default function Login() {
       }
     } catch (error) {
       // Handle any errors that occurred during the API call
-      console.log("Error:", error.message);
+      toastError("Login Failed!!!");
     }
   };
 

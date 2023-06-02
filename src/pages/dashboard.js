@@ -88,7 +88,7 @@ export default function Dashboard() {
       console.log('Error:', error.message);
     }
   };
-  
+
   const handleSubmitData = async(event)=>{
     event.preventDefault();
 
@@ -114,7 +114,7 @@ export default function Dashboard() {
         toastError('User data insertion failed');
       }
     } catch (error) {
-      console.log('Error:', error.message);
+      ctoastError('User data insertion failed');
     }
   }
 
