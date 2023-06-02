@@ -1,39 +1,39 @@
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import Notification, { toastError, toastSuccess } from './notification';
-import { toast } from 'react-toastify';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import Notification, { toastError, toastSuccess } from "./notification";
 export default function Dashboard() {
-  const [email, setName] = useState('');
-  const [role, setRole] = useState('');
-  const [data,setData]=useState('');
-  const [password, setPassword] = useState('');
-  const [activeTab, setActiveTab] = useState('addUser');
+  const [email, setName] = useState("");
+  const [role, setRole] = useState("");
+  const [message, setMessage] = useState("");
+  const [file, setFile] = useState(null);
+  const [password, setPassword] = useState("");
+  const [activeTab, setActiveTab] = useState("addUser");
   const [users, setUsers] = useState([]);
-  const [selectedUser, setSelectedUser] = useState('');
+  const [selectedUser, setSelectedUser] = useState("");
 
   const router = useRouter();
   let isLogin = router.query.isLogin;
 
   useEffect(() => {
     // Fetch all users from the API
-   if(isLogin){
-    toastSuccess("Login as Admin Successfully");
-    isLogin=false;
-   }
+    if (isLogin) {
+      toastSuccess("Login as Admin Successfully");
+      isLogin = false;
+    }
     fetchUsers();
   }, []);
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch('/api/users');
+      const response = await fetch("/api/users");
       if (response.ok) {
         const data = await response.json();
         setUsers(data);
       } else {
-        console.log('Failed to fetch users');
+        console.log("Failed to fetch users");
       }
     } catch (error) {
-      console.log('Error:', error.message);
+      console.log("Error:", error.message);
     }
   };
 
@@ -44,17 +44,19 @@ export default function Dashboard() {
   const handleRoleChange = (event) => {
     setRole(event.target.value);
   };
-  const handleDataChange = (event) => {
-    setData(event.target.value);
+  const handleMessageChange = (event) => {
+    setMessage(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
 
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
   const handleLogout = () => {
-    console.log('Logout');
-    router.push('/login');
+    router.push("/login");
   };
 
   const handleSubmit = async (event) => {
@@ -67,56 +69,51 @@ export default function Dashboard() {
     };
 
     try {
-      const response = await fetch('/api/userRoles', {
-        method: 'POST',
+      const response = await fetch("/api/userRoles", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(userRoleData),
       });
 
       if (response.ok) {
-        console.log('User role inserted successfully!');
-        setName('');
-        setRole('');
-        setPassword('');
+        console.log("User role inserted successfully!");
+        setName("");
+        setRole("");
+        setPassword("");
         fetchUsers(); // Refresh the user list
       } else {
-        console.log('User role insertion failed');
+        console.log("User role insertion failed");
       }
     } catch (error) {
-      console.log('Error:', error.message);
+      console.log("Error:", error.message);
     }
   };
 
-  const handleSubmitData = async(event)=>{
+  const handleSubmitData = async (event) => {
     event.preventDefault();
-
-    const userRoleData = {
-      role,
-      data,
-    };
-
+    const formData = new FormData();
+    formData.append("role", role);
+    formData.append("message", message);
+    if (file) {
+      formData.append("file", file);
+    }
     try {
-      const response = await fetch('/api/addData', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userRoleData),
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
       });
 
       if (response.ok) {
-        toastSuccess("User data inserted successfully")
-        setRole('');
-        setData(''); // Refresh the user list
+        toastSuccess("User data inserted successfully");
       } else {
-        toastError('User data insertion failed');
+        toastError("User data insertion failed");
       }
     } catch (error) {
-      ctoastError('User data insertion failed');
+      toastError("User data insertion failed");
     }
-  }
+  };
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -126,62 +123,61 @@ export default function Dashboard() {
     setSelectedUser(event.target.value);
   };
 
-  
   const handleRoleUpdate = async (event) => {
     event.preventDefault();
-  
+
     // Prepare the role update data
     const roleUpdateData = {
       userId: selectedUser,
       role,
     };
-  
+
     try {
       // Make the API call to update the user role
-      const response = await fetch('/api/updateRole', {
-        method: 'POST',
+      const response = await fetch("/api/updateRole", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(roleUpdateData),
       });
-  
+
       if (response.ok) {
         // Role updated successfully
-        console.log('Role updated successfully!');
+        console.log("Role updated successfully!");
         // Reset the form fields
-        setSelectedUser('');
-        setRole('');
+        setSelectedUser("");
+        setRole("");
       } else {
         // Role update failed, handle error case
-        console.log('Role update failed');
+        console.log("Role update failed");
       }
     } catch (error) {
       // Handle any errors that occurred during the API call
-      console.log('Error:', error.message);
+      console.log("Error:", error.message);
     }
   };
 
   return (
     <div className="dashboard-container">
-      <Notification/>
+      <Notification />
       <div className="sidebar">
         <ul>
           <li
-            className={activeTab === 'addUser' ? 'active' : ''}
-            onClick={() => handleTabChange('addUser')}
+            className={activeTab === "addUser" ? "active" : ""}
+            onClick={() => handleTabChange("addUser")}
           >
             Add User
           </li>
           <li
-            className={activeTab === 'manageRoles' ? 'active' : ''}
-            onClick={() => handleTabChange('manageRoles')}
+            className={activeTab === "manageRoles" ? "active" : ""}
+            onClick={() => handleTabChange("manageRoles")}
           >
             Manage Roles
           </li>
           <li
-            className={activeTab === 'addData' ? 'active' : ''}
-            onClick={() => handleTabChange('addData')}
+            className={activeTab === "addData" ? "active" : ""}
+            onClick={() => handleTabChange("addData")}
           >
             Add Data
           </li>
@@ -190,7 +186,7 @@ export default function Dashboard() {
       </div>
 
       <div className="content">
-        {activeTab === 'addUser' && (
+        {activeTab === "addUser" && (
           <div className="card">
             <h1 className="head">Add User</h1>
             <div className="form-container">
@@ -248,37 +244,41 @@ export default function Dashboard() {
           </div>
         )}
 
-{activeTab === 'manageRoles' && (
-  <div className="card">
-    <h1 className="head">Manage Roles</h1>
-    <div className="form-container">
-      <form onSubmit={handleRoleUpdate}>
-        <div className="form-group">
-          <label htmlFor="user">Select User:</label>
-          <select id="user" value={selectedUser} onChange={handleUserChange}>
-            <option value="">Select a user</option>
-            {users.map((user) => (
-              <option key={user._id} value={user._id}>
-                {user.email}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="form-group">
-          <label htmlFor="role">Role:</label>
-          <input
-            type="text"
-            id="role"
-            value={role}
-            onChange={handleRoleChange}
-          />
-        </div>
-        <button type="submit" disabled={!selectedUser}>
-          Update Role
-        </button>
-      </form>
-    </div>
-    <div className="user-table">
+        {activeTab === "manageRoles" && (
+          <div className="card">
+            <h1 className="head">Manage Roles</h1>
+            <div className="form-container">
+              <form onSubmit={handleRoleUpdate}>
+                <div className="form-group">
+                  <label htmlFor="user">Select User:</label>
+                  <select
+                    id="user"
+                    value={selectedUser}
+                    onChange={handleUserChange}
+                  >
+                    <option value="">Select a user</option>
+                    {users.map((user) => (
+                      <option key={user._id} value={user._id}>
+                        {user.email}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="role">Role:</label>
+                  <input
+                    type="text"
+                    id="role"
+                    value={role}
+                    onChange={handleRoleChange}
+                  />
+                </div>
+                <button type="submit" disabled={!selectedUser}>
+                  Update Role
+                </button>
+              </form>
+            </div>
+            <div className="user-table">
               <h2>All Users</h2>
               <table>
                 <thead>
@@ -297,14 +297,13 @@ export default function Dashboard() {
                 </tbody>
               </table>
             </div>
-  </div>
-)}
- {activeTab === 'addData' && (
+          </div>
+        )}
+        {activeTab === "addData" && (
           <div className="card">
             <h1 className="head">Add Data</h1>
             <div className="form-container">
               <form onSubmit={handleSubmitData}>
-
                 <div className="form-group">
                   <label htmlFor="role">Role:</label>
                   <input
@@ -319,22 +318,22 @@ export default function Dashboard() {
                   <textarea
                     type="text"
                     id="data"
-                    value={data}
-                    onChange={handleDataChange}
+                    value={message}
+                    onChange={handleMessageChange}
                     style={{
-                      height:"200px",
-                      width:"420px",
-                      fontSize:"18px"
+                      height: "200px",
+                      width: "420px",
+                      fontSize: "18px",
                     }}
                   />
-                  <input type="file" />
+                  <div>
+                    <label htmlFor="file">File:</label>
+                    <input type="file" id="file" onChange={handleFileChange} />
+                  </div>
                 </div>
-                  
                 <button type="submit">Add User Data</button>
               </form>
             </div>
-
-            
           </div>
         )}
       </div>
@@ -429,17 +428,17 @@ export default function Dashboard() {
           padding: 8px;
           border-bottom: 1px solid #ddd;
           text-align: left;
-          color:black;
+          color: black;
         }
 
         th {
           background-color: #f2f2f2;
-          color:black;
+          color: black;
         }
 
-        select{
-            color:black;
-            border:1px solid;
+        select {
+          color: black;
+          border: 1px solid;
         }
       `}</style>
     </div>
