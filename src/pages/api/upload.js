@@ -1,7 +1,17 @@
 import multer from "multer";
 import connectDB from "@/db";
 import { RoleData } from "@/models/RoleData";
+import cloudinaryV2 from "cloudinary";
+import { v2 as cloudinary } from "cloudinary";
+
 connectDB();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 const storage = multer.diskStorage({
   destination: "public/images",
   filename: (req, file, cb) => {
@@ -22,21 +32,51 @@ export const config = {
 };
 
 export default async function handler(req, res) {
-  upload.single("file")(req, res, async (err) => {
-    if (err instanceof multer.MulterError) {
-      return res.status(400).json({ message: err.message });
-    } else if (err) {
-      return res.status(500).json({ message: "Internal server error" });
-    }
-    const { role, message } = req.body;
-    const file = req.file ? req.file.filename : null;
-    try {
-      const roleData = new RoleData({ role, message, file });
-      await roleData.save();
+  try {
+    await new Promise((resolve, reject) => {
+      upload.single("file")(req, res, (err) => {
+        if (err instanceof multer.MulterError) {
+          return reject({ status: 400, message: err.message });
+        } else if (err) {
+          return reject({ status: 500, message: "Internal server error" });
+        }
 
-      return res.status(200).json({ message: "Form submitted successfully" });
-    } catch (error) {
-      return res.status(500).json({ message: "Internal server error" });
+        resolve();
+      });
+    });
+
+    let { role, message } = req.body;
+    let file = req.file;
+    let result;
+    if (file) {
+       result = await cloudinary.uploader.upload(file.path,  { resource_type: "raw" }, 
+       function(error, result) {console.log(result, error); });
+      // return res.status(400).json({ message: "Missing required parameter - file" });
+    }else{
+       result={
+        secure_url:"null"
+      }
     }
-  });
+
+    if(!message){
+      message = 'null'
+    }
+
+    // Upload file to Cloudinary
+    // const result = await cloudinary.uploader.upload(file.path);
+
+    // Create a new instance of RoleData with Cloudinary URL
+    const roleData = new RoleData({
+      role,
+      message,
+      file: result.secure_url, // Store the Cloudinary image URL
+    });
+
+    await roleData.save(); // Save the roleData instance to the database
+
+    return res.status(200).json({ message: "Form submitted successfully" });
+  } catch (error) {
+    console.error(error);
+    return res.status(error.status || 500).json({ message: error.message || "Internal server error" });
+  }
 }

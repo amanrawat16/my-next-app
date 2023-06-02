@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Notification, { showToast, toastError } from "./notification";
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +18,7 @@ export default function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
+
     // Prepare the login data
     const loginData = {
       email,
@@ -34,10 +35,10 @@ export default function Login() {
         body: JSON.stringify(loginData),
       });
       const responseData = await response.json();
-      if (response.ok) {        
+      if (response.ok) {
+        localStorage.setItem("role", responseData.role);
         router.push({
           pathname: "/user",
-          query: { role: responseData.role, isLogin:true },
         }); // Redirect to home page
       } else {
         // Login failed, handle error case
@@ -72,16 +73,17 @@ export default function Login() {
               onChange={handlePasswordChange}
             />
           </div>
-          <button type="submit" onClick={handleSubmit}>Login</button>
-          <Notification/>
+          <button type="submit" onClick={handleSubmit}>
+            Login
+          </button>
+          <Notification />
         </form>
-        
+
         <p>
           <Link href="/loginAdmin">Admin Login</Link>
         </p>
-        
       </div>
-     
+
       <style jsx>{`
         .container {
           display: flex;
@@ -109,11 +111,13 @@ export default function Login() {
         .form-group {
           margin-bottom: 10px;
           display: flex;
+          flex-direction: column;
         }
 
         input {
           width: 100%;
           padding: 5px;
+          height:30px;
           color: black;
           border: 1px solid black;
           border-radius: 2px;
@@ -121,13 +125,15 @@ export default function Login() {
 
         label {
           color: black;
-          font-size: 16px;
+          font-size: 20px;
           font-weight: 700;
           padding: 10px;
         }
 
         button {
-          width: 100%;
+          
+          font-size:20px;
+          font-weight:700;
           padding: 10px;
           background-color: #2196f3;
           color: #ffffff;
@@ -139,9 +145,18 @@ export default function Login() {
         p {
           margin-top: 10px;
         }
+
+        @media (max-width: 600px) {
+          /* Responsive styles for mobile devices */
+          .card {
+            padding: 30px;
+          }
+          input,
+          button {
+            font-size: 14px;
+          }
+        }
       `}</style>
-       
     </div>
-    
   );
 }

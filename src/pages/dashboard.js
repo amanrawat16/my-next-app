@@ -107,6 +107,8 @@ export default function Dashboard() {
 
       if (response.ok) {
         toastSuccess("User data inserted successfully");
+        setMessage("");
+        setFile("");
       } else {
         toastError("User data insertion failed");
       }
@@ -303,7 +305,7 @@ export default function Dashboard() {
           <div className="card">
             <h1 className="head">Add Data</h1>
             <div className="form-container">
-              <form onSubmit={handleSubmitData}>
+              <form onSubmit={handleSubmitData} encType="multipart/form-data">
                 <div className="form-group">
                   <label htmlFor="role">Role:</label>
                   <input
@@ -331,7 +333,7 @@ export default function Dashboard() {
                     <input type="file" id="file" onChange={handleFileChange} />
                   </div>
                 </div>
-                <button type="submit">Add User Data</button>
+                <button type="submit">Add Data</button>
               </form>
             </div>
           </div>

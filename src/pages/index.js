@@ -50,12 +50,12 @@ export default function CampusDataPage() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="#about">
                   About
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="#footer">
                   Contact Us
                 </a>
               </li>
@@ -73,7 +73,7 @@ export default function CampusDataPage() {
               <li className="nav-item">
                 <a
                   className="nav-link btn btn-primary ml-auto text-light font-weight-bold"
-                  href="#"
+                  href="#call"
                   style={{ backgroundColor: "#001064" }}
                 >
                   Request a Call
@@ -85,20 +85,21 @@ export default function CampusDataPage() {
       </nav>
 
       <section className="image-container">
-        <div className="overlay"></div>
         <div className="container">
-          <h2 style={{ color: "#fff" }}>Student Lead Generation</h2>
+        <div className="overlay">
+          <h2 style={{ color: "#fff",marginTop:"60px" }}>Student Lead Generation</h2>
           <p>
             Optimized for conversion, our websites are the perfect way for your
             school to generate qualified student leads.
           </p>
-          <a className="btn btn-primary" href="#">
+          <a className="btn btn-primary" href="#call">
             Schedule a Call
           </a>
+          </div>
         </div>
       </section>
 
-      <section className="about">
+      <section className="about" id="about">
         <div className="container">
           <div className="row">
             <div className="col-md-6">
@@ -185,7 +186,7 @@ export default function CampusDataPage() {
 
       <section className="mail">
         <div className="container">
-          <h2>Request a Call</h2>
+          <h2 id="call">Request a Call</h2>
           <div className="row">
             <div className="col">
               <form>
@@ -234,7 +235,7 @@ export default function CampusDataPage() {
         </div>
       </section>
 
-      <footer>
+      <footer id="footer">
         <div className="container">
           <div className="row">
             <div className="logo">
