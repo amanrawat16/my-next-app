@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
+import { useState } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import Notification, { toastError } from "./notification";
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
 
   const handleEmailChange = (event) => {
@@ -26,36 +27,26 @@ export default function Login() {
 
     try {
       // Make the API call to perform login
-      const response = await fetch('/api/loginAdmin', {
-        method: 'POST',
+      const response = await fetch("/api/loginAdmin", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(loginData),
       });
 
       if (response.ok) {
-        const responseData = await response.json();
         // Login successful, redirect to home page
-        console.log('Login successful!');
-        if(responseData.role == 'admin'){
-          router.push('/dashboard');
-        }
-        else{
-          router.push({
-            pathname: '/user',
-            query: { role: responseData.role },
-        }) // Redirect to home page
-     
-      } 
-    }
-      else {
+        router.push({
+        pathname:"/dashboard",
+        query:{isLogin:true}});
+      } else {
         // Login failed, handle error case
-        console.log('Login failed');
+        toastError("Login Failed!!!")
       }
     } catch (error) {
       // Handle any errors that occurred during the API call
-      console.log('Error:', error.message);
+      console.log("Error:", error.message);
     }
   };
 
@@ -83,10 +74,11 @@ export default function Login() {
             />
           </div>
           <button type="submit">Login</button>
+        <Notification/>
         </form>
 
         <p>
-         <Link href="/login">User Login</Link>
+          <Link href="/login">User Login</Link>
         </p>
       </div>
 
@@ -105,35 +97,33 @@ export default function Login() {
           padding: 60px;
           border-radius: 5px;
           max-width: 600px;
-          width:400px;
+          width: 400px;
           text-align: center;
-          
         }
 
         h1 {
           margin-bottom: 20px;
-          color:black;
+          color: black;
         }
 
         .form-group {
           margin-bottom: 10px;
-          display:flex;
+          display: flex;
         }
-       
 
         input {
           width: 100%;
           padding: 5px;
-          color:black;
+          color: black;
           border: 1px solid black;
-          border-radius:2px;
+          border-radius: 2px;
         }
 
-        label{
-            color:black;
-            font-size:16px;
-            font-weight:700;
-            padding:10px;
+        label {
+          color: black;
+          font-size: 16px;
+          font-weight: 700;
+          padding: 10px;
         }
 
         button {

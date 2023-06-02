@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-
+import Notification, { toastError, toastSuccess } from './notification';
+import { toast } from 'react-toastify';
 export default function Dashboard() {
   const [email, setName] = useState('');
   const [role, setRole] = useState('');
@@ -11,11 +12,16 @@ export default function Dashboard() {
   const [selectedUser, setSelectedUser] = useState('');
 
   const router = useRouter();
+  let isLogin = router.query.isLogin;
 
   useEffect(() => {
     // Fetch all users from the API
+   if(isLogin){
+    toastSuccess("Login as Admin Successfully");
+    isLogin=false;
+   }
     fetchUsers();
-  }, [role]);
+  }, []);
 
   const fetchUsers = async () => {
     try {
@@ -101,11 +107,11 @@ export default function Dashboard() {
       });
 
       if (response.ok) {
-        console.log('User data inserted successfully!');
+        toastSuccess("User data inserted successfully")
         setRole('');
         setData(''); // Refresh the user list
       } else {
-        console.log('User data insertion failed');
+        toastError('User data insertion failed');
       }
     } catch (error) {
       console.log('Error:', error.message);
@@ -158,6 +164,7 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard-container">
+      <Notification/>
       <div className="sidebar">
         <ul>
           <li

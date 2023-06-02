@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-
+import { useState } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import Notification, { showToast, toastError } from "./notification";
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
 
   const handleEmailChange = (event) => {
@@ -17,7 +17,7 @@ export default function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    
     // Prepare the login data
     const loginData = {
       email,
@@ -26,36 +26,26 @@ export default function Login() {
 
     try {
       // Make the API call to perform login
-      const response = await fetch('/api/login', {
-        method: 'POST',
+      const response = await fetch("/api/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(loginData),
       });
-
-      if (response.ok) {
-        const responseData = await response.json();
-        // Login successful, redirect to home page
-        console.log('Login successful!');
-        if(responseData.role == 'admin'){
-          router.push('/dashboard');
-        }
-        else{
-          router.push({
-            pathname: '/user',
-            query: { role: responseData.role },
-        }) // Redirect to home page
-     
-      } 
-    }
-      else {
+      const responseData = await response.json();
+      if (response.ok) {        
+        router.push({
+          pathname: "/user",
+          query: { role: responseData.role },
+        }); // Redirect to home page
+      } else {
         // Login failed, handle error case
-        console.log('Login failed');
+        toastError("Login Failed!!!");
       }
     } catch (error) {
       // Handle any errors that occurred during the API call
-      console.log('Error:', error.message);
+      console.log("Error:", error.message);
     }
   };
 
@@ -63,7 +53,7 @@ export default function Login() {
     <div className="container">
       <div className="card">
         <h1>User Login</h1>
-        <form onSubmit={handleSubmit}>
+        <form>
           <div className="form-group">
             <label htmlFor="email">Email:</label>
             <input
@@ -82,14 +72,16 @@ export default function Login() {
               onChange={handlePasswordChange}
             />
           </div>
-          <button type="submit">Login</button>
+          <button type="submit" onClick={handleSubmit}>Login</button>
+          <Notification/>
         </form>
-
+        
         <p>
-         <Link href="/loginAdmin">Admin Login</Link>
+          <Link href="/loginAdmin">Admin Login</Link>
         </p>
+        
       </div>
-
+     
       <style jsx>{`
         .container {
           display: flex;
@@ -105,35 +97,33 @@ export default function Login() {
           padding: 60px;
           border-radius: 5px;
           max-width: 600px;
-          width:400px;
+          width: 400px;
           text-align: center;
-          
         }
 
         h1 {
           margin-bottom: 20px;
-          color:black;
+          color: black;
         }
 
         .form-group {
           margin-bottom: 10px;
-          display:flex;
+          display: flex;
         }
-       
 
         input {
           width: 100%;
           padding: 5px;
-          color:black;
+          color: black;
           border: 1px solid black;
-          border-radius:2px;
+          border-radius: 2px;
         }
 
-        label{
-            color:black;
-            font-size:16px;
-            font-weight:700;
-            padding:10px;
+        label {
+          color: black;
+          font-size: 16px;
+          font-weight: 700;
+          padding: 10px;
         }
 
         button {
@@ -150,6 +140,8 @@ export default function Login() {
           margin-top: 10px;
         }
       `}</style>
+       
     </div>
+    
   );
 }
