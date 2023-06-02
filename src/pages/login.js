@@ -37,7 +37,7 @@ export default function Login() {
       if (response.ok) {        
         router.push({
           pathname: "/user",
-          query: { role: responseData.role },
+          query: { role: responseData.role, isLogin:true },
         }); // Redirect to home page
       } else {
         // Login failed, handle error case

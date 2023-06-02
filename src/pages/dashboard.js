@@ -88,7 +88,7 @@ export default function Dashboard() {
       console.log('Error:', error.message);
     }
   };
-
+  
   const handleSubmitData = async(event)=>{
     event.preventDefault();
 
@@ -327,7 +327,9 @@ export default function Dashboard() {
                       fontSize:"18px"
                     }}
                   />
+                  <input type="file" />
                 </div>
+                  
                 <button type="submit">Add User Data</button>
               </form>
             </div>

@@ -1,20 +1,25 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Notification ,{ toastSuccess } from "./notification";
 
 export default function UserDashboard() {
   const router = useRouter();
   const role = router.query.role;
-
+  let isLogin= router.query.isLogin;
   const [data, setData] = useState();
   useEffect(() => {
+    if (isLogin) {
+      toastSuccess(`${role.toLocaleUpperCase()} user login successfully`);
+      isLogin=false;
+    }
     fetchData();
   }, []);
 
   const fetchData = async () => {
     try {
       const response = await fetch(`/api/getDatabyRole?role=${role}`);
+      const data = await response.json();
       if (response.ok) {
-        const data = await response.json();
         setData(data);
       } else {
         console.log("Failed to fetch data");
@@ -27,6 +32,7 @@ export default function UserDashboard() {
   return (
     <>
       <div className="container">
+        <Notification/>
         <div className="user-table">
           <h1>All {role} Data</h1>
           <table>
